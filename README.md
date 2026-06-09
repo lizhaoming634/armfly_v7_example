@@ -1,54 +1,36 @@
-# Armfly V7 Zephyr Examples
+# Armfly V7 Zephyr 示例
 
-This repository contains Zephyr examples and notes for the Armfly STM32H743XIH6
-V7 development board.
+这个仓库用于记录 Armfly STM32H743XIH6 V7 开发板的 Zephyr 示例代码和学习笔记。
 
-## Board
+## 开发板信息
 
-- Board: Armfly STM32H743XIH6 V7
-- Zephyr board target: `armfly_stm32h743xih6`
-- MCU: STM32H743XIH6
+- 开发板：Armfly STM32H743XIH6 V7
+- Zephyr 板级名称：`armfly_stm32h743xih6`
+- MCU：STM32H743XIH6
 
-## Repository Layout
+## 目录结构
 
 ```text
 doc/
-  00_start/        Basic setup notes
-  01_helloworld/   Hello World notes
+  00_start/        环境搭建和基础使用
+  01_helloworld/   Hello World 示例说明
 
 src/
-  01_helloworld/   Hello World example project
+  01_helloworld/   Hello World 示例工程
 ```
 
-## Build
+## 快速开始
 
-Run commands from the Zephyr workspace root:
+第一次使用建议先阅读环境搭建文档：
 
-```powershell
-cd D:\zephyrproject
-west build -b armfly_stm32h743xih6 .\armfly_v7_example\src\01_helloworld -d .\armfly_v7_example\build\01_helloworld -p always
-```
+- [00. 环境搭建](doc/00_start/00_start.md)
 
-## Flash
+## 注意事项
 
-Using DAPLink or another CMSIS-DAP probe:
+开发板上的部分外设通过 STM32 FMC Bank1 外部锁存器连接，例如板载 LED。
+这些外设默认不会在 Zephyr 板级设备树中启用。使用相关示例时，需要在应用
+里显式启用 MEMC，并通过 overlay 启用对应的设备树节点。
 
-```powershell
-west flash -d .\armfly_v7_example\build\01_helloworld -r pyocd
-```
+## 许可证
 
-Using ST-Link:
-
-```powershell
-west flash -d .\armfly_v7_example\build\01_helloworld -r stm32cubeprogrammer
-```
-
-## Notes
-
-Some onboard peripherals, such as the LEDs, are connected through an external
-latch on STM32 FMC Bank1. Examples that use these peripherals need to enable
-MEMC and the related board devicetree overlay explicitly.
-
-## License
-
-MIT License
+见 [LICENSE](LICENSE)。
