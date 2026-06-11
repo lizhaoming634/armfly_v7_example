@@ -6,10 +6,14 @@
 
 #include <stdio.h>
 #include <zephyr/app_version.h>
+#include <zephyr/kernel.h>
 
 int main(void)
 {
-	printf("Hello World! %s\n", CONFIG_BOARD_TARGET);
 	printf("App version: %s\r\n", APP_VERSION_STRING);
+	while (1) {
+		printf("Hello World! %s\n", CONFIG_BOARD_TARGET);
+		k_sleep(K_SECONDS(1));
+	}
 	return 0;
 }
