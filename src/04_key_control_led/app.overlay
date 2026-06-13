@@ -1,0 +1,25 @@
+/*
+ * Enable the Armfly board LEDs. They are driven through an FMC-connected
+ * memory-mapped latch, not direct STM32 GPIO pins.
+ */
+
+/ {
+	aliases {
+		led0 = &led0;
+		led1 = &led1;
+		led2 = &led2;
+		led3 = &led3;
+	};
+};
+
+&{/buttons} {
+	/delete-property/ polling-mode;
+};
+
+&latch_gpio {
+	status = "okay";
+};
+
+&leds {
+	status = "okay";
+};
